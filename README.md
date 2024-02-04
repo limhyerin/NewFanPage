@@ -7,9 +7,9 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 <br/>
 
 ## 브랜치(branch)
-1. propsDrilling : context, redux 없이 useState만으로 상태관리해서 코드 작성
-2. context : react context API 사용하여 전역상태를 이용한 코드로 리팩터링
-3. redux : redux 라이브러리를 이용한 코드로 리팩터링
+- **propsDrilling** : context, redux 없이 useState만으로 상태관리해서 코드 작성
+- **context** : react context API 사용하여 전역상태를 이용한 코드로 리팩터링
+- **redux** : redux 라이브러리를 이용한 코드로 리팩터링
 <br/>
 
 ## 구현사항
