@@ -55,7 +55,7 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - 수정 버튼 클릭 시 수정 가능한 입력창 구현
 - 완료 버튼 시 변경내용 적용
 ![](https://velog.velcdn.com/images/hrnn00/post/24824bf9-68ca-4183-85ba-9e27aecd0781/image.png)
-- 삭제버튼 클릭시 유효성 검사
+- 삭제버튼 클릭시 유효성 검사 <br/>
 ![](https://velog.velcdn.com/images/hrnn00/post/720c5fe2-5842-4ffc-9297-36a074aa4da0/image.png)
 <br/>
 
