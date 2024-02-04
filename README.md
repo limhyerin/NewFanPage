@@ -6,6 +6,12 @@
 React를 사용하여 useState만을 이용해 상태를 관리해보고 contextAPI와 Redux를 적용하여 다시 바꾸어 적용해보았으며 팬페이지(Fan Page)로 각 멤버를 지정해서 닉네임, 응원의 팬레터 글, 원하는 프로필 사진의 url을 작성한 후 등록하기 버튼을 클릭하면 최근순으로 팬레터가 추가되고 수정 및 삭제가 가능한 페이지입니다.
 <br/>
 
+## 브랜치(branch)
+1. propsDrilling : context, redux 없이 useState만으로 상태관리해서 코드 작성
+2. context : react context API 사용하여 전역상태를 이용한 코드로 리팩터링
+3. redux : redux 라이브러리를 이용한 코드로 리팩터링
+<br/>
+
 ## 구현사항
 > ### component
 
@@ -59,15 +65,9 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 ![](https://velog.velcdn.com/images/hrnn00/post/720c5fe2-5842-4ffc-9297-36a074aa4da0/image.png)
 <br/>
 
+> ### router
 
-
-## 브랜치(branch)
-1. propsDrilling : context, redux 없이 useState만으로 상태관리해서 코드 작성
-2. context : react context API 사용하여 전역상태를 이용한 코드로 리팩터링
-3. redux : redux 라이브러리를 이용한 코드로 리팩터링
-<br/>
-
-## 라우터
+#### 7. Router.js
 - Router.js : App 컴포넌트에서 detail 페이지로 넘어갈때 id값 넘겨주기
 ```jsx
 import React from "react";
