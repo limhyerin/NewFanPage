@@ -14,6 +14,7 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - 로고 클릭시, 새로고침
 : window.location.reload()
 ![](https://velog.velcdn.com/images/hrnn00/post/4e985003-feef-4877-abb2-372ad4d97569/image.png)
+<br/>
 
 #### 2. Member
 - styled-components 사용해서 css 적용
@@ -21,14 +22,15 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - 해당 그룹 멤버들 사진 적용
 - 각 멤버 사진 클릭시, 해당 멤버의 팬레터만 보여지도록 설정
 ![](https://velog.velcdn.com/images/hrnn00/post/ac77add0-a4e3-4e82-bbaf-4010348b432b/image.png)
-
+<br/>
 
 #### 3. Main
 - 닉네임, 프로필사진 url, 팬레터 보낼 멤버 클릭, 내용 구현
 - select-box 구현 : 윈터, 카리나, 닝닝, 지젤 중에 선택
 - 글자수 카운트 구현 : 닉네임과 내용 따로 state를 만들어서 관리
-- 등록시에 로컬스토리지에 객체형태로 값 저장
+- 등록시에 로컬스토리지에 객체형태로 값 저장<br/>
 ![](https://velog.velcdn.com/images/hrnn00/post/56c18aaf-6924-4ec7-80a3-749c853d2aba/image.png)
+<br/>
 
 #### 4. Footer
 - 좌측 : 프로필 사진 url을 받아 css를 주어 동그란 프로필 이미지로 적용
@@ -37,6 +39,7 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - 등록한 시간 적용 : new Date().toLocaleString()
 - 각 레터 마우스 올릴 시, hover 효과 적용
 ![](https://velog.velcdn.com/images/hrnn00/post/de37c0dc-7cde-457c-b8d0-f62efe367b55/image.png)
+<br/>
 
 #### 5. InputData
 - Main 컴포넌트에서 반복되는 입력을 재사용하기 위한 컴포넌트
@@ -52,7 +55,7 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 ![](https://velog.velcdn.com/images/hrnn00/post/24824bf9-68ca-4183-85ba-9e27aecd0781/image.png)
 - 삭제버튼 클릭시 유효성 검사
 ![](https://velog.velcdn.com/images/hrnn00/post/720c5fe2-5842-4ffc-9297-36a074aa4da0/image.png)
-
+<br/>
 
 
 
@@ -60,6 +63,7 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 1. propsDrilling : context, redux 없이 useState만으로 상태관리해서 코드 작성
 2. context : react context API 사용하여 전역상태를 이용한 코드로 리팩터링
 3. redux : redux 라이브러리를 이용한 코드로 리팩터링
+<br/>
 
 ## 라우터
 - Router.js : App 컴포넌트에서 detail 페이지로 넘어갈때 id값 넘겨주기
