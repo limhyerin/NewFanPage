@@ -1,40 +1,89 @@
-import { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { useSelector } from "react-redux";
 
-const Footer = ({data}) => {
-    const [nickName, setNickName] = useState('');
-    const [contents, setContents] = useState('');
-    return <footer>
+const StyledFooter = styled.footer`
+    width: 50%;
+    background-color: rgb(255, 255, 255);
+    border: 3px solid transparent;
+    border-radius: 8px;
+    padding: 20px 20px 20px 20px;
+  
+    margin: 10px auto 10px auto;
+`;
+
+const StyledBox = styled.div`
+    background-color: rgba(93, 120, 160, 0.658);
+    border: 2px solid transparent;
+    margin-bottom: 10px;
+    display: flex;
+    padding: 10px 10px 10px 10px;
+  
+    text-decoration: none;
+    color: black;
+    &:hover {
+        background-color: rgba(75, 94, 122, 0.658);
+    }
+`; 
+  
+const StyledProfileIMG = styled.img`
+    width: 100px;
+    height: 100px;
+    border-radius: 70%;
+    text-align: center;
+`; 
+
+const StyledProfileZone = styled.div`
+    width: 20%;
+    padding-top: 20px;
+    padding-left: 20px;
+`; 
+
+const StyledContentZone = styled.div`
+    width: 75%;
+    color: black;
+`; 
+
+const StyledEmptyBox = styled.p`
+    color: #000000;
+    text-align: center;
+`;
+
+const Footer = () => {
+    const navigate = useNavigate();
+    // 데이터 가져옴
+    const { data, selectBtn } = useSelector((state) => ({
+        data: state.data,
+        selectBtn: state.selectBtn,
+    }));
+    
+    const filteredData = data ? data.filter((item) => item.iswho === selectBtn) : [];
+
+    return <StyledFooter>
                 {
-                    data.filter((item) => !item.isDone).map((item) => (
+                    filteredData.length > 0 ? (
+                    filteredData.map((item) => (
                         <div key={item.id} className="boxContainer">
-                            <div className="box">
-                                <div>
-                                    <p>이미지 들어올 곳</p>
-                                </div>
-                                <div>
+                            <StyledBox onClick={() => {
+                                navigate(`/detail/${item.id}`);
+                            }}>
+                                <StyledProfileZone>
+                                    <StyledProfileIMG alt="profileImg" src={item.profileImg}/>  
+                                </StyledProfileZone>
+                                <StyledContentZone>
                                     <h3>{item.nickName}</h3>
-                                    <p>시간</p>
+                                    <p>{item.time}</p>
                                     <p>{item.contents}</p>
-                                </div>
-                            </div>
+                                </StyledContentZone>
+                            </StyledBox>
                         </div>
                     ))
+                    ) : (
+                        <StyledEmptyBox>등록된 글이 없습니다</StyledEmptyBox>
+                    )
                 }
-            </footer>
+            </StyledFooter>
 }
 
 export default Footer
-
-
-
-// 왼쪽 사진
-// 오른쪽 닉네임, 시간, 내용
-// 아래 수정, 삭제 버튼
-// 삭제 버튼 클릭시 정말로 삭제 하겠냐는 안내창 띄우기
-// 마우스 올리면 hover() 커져보이는
-// 클릭시 새 페이지 이동 -> 
-
-// 새 페이지에서 홈으로 돌아가는 버튼 하나,
-// 사진, 닉네임, to.누구, 시간, 수정 input창
-// 수정완료 버튼
-// 클릭시 이대로 수정하시겠습니까? 물어보고 확인 누르면 수정
