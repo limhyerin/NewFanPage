@@ -166,7 +166,7 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 
 #### 7. Router.js
 - Router.js : App 컴포넌트에서 detail 페이지로 넘어갈때 id값 넘겨주기
-```jsx
+```js
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import App from "./App";
