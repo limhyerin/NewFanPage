@@ -1,22 +1,18 @@
 # 💫Project : Aespa FanPage💫
-
 ![](https://velog.velcdn.com/images/hrnn00/post/27369841-9c76-4363-81ef-b08e92083471/image.png)
 <br/>
 
 ## 프로젝트 설명
-
 React를 사용하여 useState만을 이용해 상태를 관리해보고 contextAPI와 Redux를 적용하여 다시 바꾸어 적용해보았으며 팬페이지(Fan Page)로 각 멤버를 지정해서 닉네임, 응원의 팬레터 글, 원하는 프로필 사진의 url을 작성한 후 등록하기 버튼을 클릭하면 최근순으로 팬레터가 추가되고 수정 및 삭제가 가능한 페이지
 <br/>
 
 ## 브랜치(branch)
-
 - **propsDrilling** : context, redux 없이 useState만으로 상태관리해서 코드 작성
 - **context** : react context API 사용하여 전역상태를 이용한 코드로 리팩터링
 - **redux** : redux 라이브러리를 이용한 코드로 리팩터링
   <br/>
 
 ## 구현사항
-
 > ### component
 
 #### 1. Header.jsx
