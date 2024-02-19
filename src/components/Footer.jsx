@@ -54,10 +54,10 @@ const Footer = () => {
     const navigate = useNavigate();
     // 데이터 가져옴
     const { data, selectBtn } = useSelector((state) => ({
-        data: state.data,
+        data: state.data.data,
         selectBtn: state.selectBtn,
     }));
-    
+
     const filteredData = data ? data.filter((item) => item.iswho === selectBtn) : [];
 
     return <StyledFooter>

@@ -15,8 +15,9 @@ export const setSelectWho = (selectWho) => ({
   selectWho,
 });
 
+const storedData = localStorage.getItem(["data"]);
 const initialState = {
-  data: JSON.parse(localStorage.getItem(["data"])) || [],
+  data: storedData ? JSON.parse(storedData) : [],
   selectBtn: "winter",
   selectWho: "winter",
 };

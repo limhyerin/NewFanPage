@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 import { useDispatch } from "react-redux";
 import { setSelectBtn } from "../redux/modules/data";
 
@@ -36,25 +36,56 @@ const StyledMember = styled.img`
 	    transform: scale(1.05);
         border: 3px solid rgb(172, 160, 196);
     }
+
+    ${props => props.isSelected && css`
+        -webkit-filter: grayscale(0);
+	    filter: grayscale(0);
+
+        -webkit-transform: scale(1.05);
+	    transform: scale(1.05);
+        border: 3px solid rgb(172, 160, 196);
+    `}
+    // 선택된 이미지에 대한 스타일 적용
 `;
 
 const Member = () => {
     // 데이터에 접근
     const dispatch = useDispatch();
+    const [selected, setSelected] = useState(null);
 
     return <StyledMemberClickButtons>
-                <StyledMember alt="Img" src={`${process.env.PUBLIC_URL}/public_assets/winter.jpg`} onClick={() => {
-                    dispatch(setSelectBtn('winter'))
-                }}></StyledMember>
-                <StyledMember alt="Img" src={`${process.env.PUBLIC_URL}/public_assets/karina.jpeg`} onClick={() => {
-                    dispatch(setSelectBtn('karina'))
-                }}></StyledMember>
-                <StyledMember alt="Img" src={`${process.env.PUBLIC_URL}/public_assets/ningning.png`} onClick={() => {
-                    dispatch(setSelectBtn('ningning'))
-                }}></StyledMember>
-                <StyledMember alt="Img" src={`${process.env.PUBLIC_URL}/public_assets/giselle.jpeg`} onClick={() => {
-                    dispatch(setSelectBtn('giselle'))
-                }}></StyledMember>
+                <StyledMember alt="winter profile" 
+                              src={`${process.env.PUBLIC_URL}/public_assets/winter.jpg`} 
+                              onClick={() => {
+                                  dispatch(setSelectBtn('winter'));
+                                  setSelected('winter');
+                              }} 
+                              isSelected={selected === 'winter'}
+                ></StyledMember>
+                <StyledMember alt="karina profile" 
+                              src={`${process.env.PUBLIC_URL}/public_assets/karina.jpeg`} 
+                              onClick={() => {
+                                  dispatch(setSelectBtn('karina'));
+                                  setSelected('karina');
+                              }} 
+                              isSelected={selected === 'karina'}
+                ></StyledMember>
+                <StyledMember alt="ningning profile" 
+                              src={`${process.env.PUBLIC_URL}/public_assets/ningning.png`} 
+                              onClick={() => {
+                                  dispatch(setSelectBtn('ningning'));
+                                  setSelected('ningning');
+                              }} 
+                              isSelected={selected === 'ningning'}
+                ></StyledMember>
+                <StyledMember alt="giselle profile" 
+                              src={`${process.env.PUBLIC_URL}/public_assets/giselle.jpeg`} 
+                              onClick={() => {
+                                  dispatch(setSelectBtn('giselle'));
+                                  setSelected('giselle');
+                              }} 
+                              isSelected={selected === 'giselle'}
+                ></StyledMember>
             </StyledMemberClickButtons>
 }
 
