@@ -1,36 +1,52 @@
-export const SET_DATA = "SET_DATA";
-export const SET_SELECT_BTN = "SET_SELECT_BTN";
-export const SET_SELECT_WHO = "SET_SELECT_WHO";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
-export const setData = (data) => ({
-  type: SET_DATA,
-  data,
-});
-export const setSelectBtn = (selectBtn) => ({
-  type: SET_SELECT_BTN,
-  selectBtn,
-});
-export const setSelectWho = (selectWho) => ({
-  type: SET_SELECT_WHO,
-  selectWho,
-});
+// 비동기 처리를 위한 thunk를 생성합니다.
+export const fetchData = createAsyncThunk("data/fetchData", async () => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_SERVER_URL}/posts`
+    ); // axios.get 함수를 이용해 데이터를 불러옵니다.
 
-const storedData = localStorage.getItem(["data"]);
-const initialState = {
-  data: storedData ? JSON.parse(storedData) : [],
-  selectBtn: "winter",
-  selectWho: "winter",
-};
+    const nickName = localStorage.getItem("nickName") || "";
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case SET_DATA:
-      return { ...state, data: action.data };
-    case SET_SELECT_BTN:
-      return { ...state, selectBtn: action.selectBtn };
-    case SET_SELECT_WHO:
-      return { ...state, selectWho: action.selectWho };
-    default:
-      return state;
+    return { posts: response.data.posts, nickName };
+  } catch (err) {
+    console.error("Failed to fetch data: ", err);
   }
-}
+});
+
+const dataSlice = createSlice({
+  name: "data",
+  initialState: {
+    data: [],
+    selectBtn: "winter",
+    selectWho: "winter",
+    nickName: "",
+  },
+  reducers: {
+    setData: (state, action) => {
+      state.data = action.payload;
+    },
+    setSelectBtn: (state, action) => {
+      state.selectBtn = action.payload;
+    },
+    setSelectWho: (state, action) => {
+      state.selectWho = action.payload;
+    },
+    setNickName: (state, action) => {
+      state.nickName = action.payload;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchData.fulfilled, (state, action) => {
+      state.data = action.payload.posts;
+      state.nickName = action.payload.nickName;
+    });
+  },
+});
+
+export const { setData, setSelectBtn, setSelectWho, setNickName } =
+  dataSlice.actions;
+
+export default dataSlice.reducer;

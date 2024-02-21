@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setData, setSelectWho } from "../redux/modules/data";
 import uuid from "react-uuid";
 import styled from "styled-components"
+import axios from 'axios';
 
 const StyledMain = styled.main`
     width: 30%;
@@ -22,7 +23,6 @@ const StyledContentInput = styled.textarea`
     height: 60px;
     background-color: rgba(189, 189, 189, 0.425);
     border: 3px solid transparent;
-    //border-radius: 8px;
 `;
 
 const StyledCount = styled.p`
@@ -47,23 +47,40 @@ const StyledRegist = styled.main`
 `;
 
 const Main = () => {
-    const [nickName, setNickName] = useState('');
     const [contents, setContents] = useState('');
     const [profileImg, setProfileImg] = useState('');
 
-    // 데이터에 접근
-    const dispatch = useDispatch();
-    const { data, selectWho } = useSelector((state) => ({
-        data: state.data,
-        selectWho: state.selectWho
-    }));
-
     // 글자수 제한
-    let [inputCount, setInputCount] = useState(0); 
     let [contentCount, setContentCount] = useState(0);
 
-    const clickAddHandler = (event) => {
-        if(nickName && contents) {
+    // 데이터에 접근
+    const dispatch = useDispatch();
+    const { data, selectWho, nickName } = useSelector((state) => ({
+        data: state.data.data,
+        selectWho: state.data.selectWho,
+        nickName: state.data.nickName
+    }));
+
+    const postData = async (newData) => {
+        try {
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/posts`, newData);
+            return response.data;
+        } catch (err) {
+            console.error("Failed to post data: ", err);
+        }
+    }
+
+    // 로컬 스토리지 데이터 저장
+    useEffect(() => {
+        localStorage.setItem('data', JSON.stringify(data)); // 객체 모양 그대로 유지
+    }, [data]);
+
+    useEffect(() => {
+        localStorage.setItem('nickName', nickName);
+    }, [nickName]);
+
+    const clickAddHandler = async () => {
+        if(contents) {
             const newData = {
                 id: uuid(),
                 nickName: nickName,
@@ -72,36 +89,16 @@ const Main = () => {
                 time: new Date().toLocaleString(),
                 iswho: selectWho,
             }
-            // setData([newData,...data]);
-            dispatch(setData([newData, ...data]));
-            setNickName(''); // 등록 후 닉네임 초기화
-            setContents(''); // 등록 후 내용 초기화
+            const postedData = await postData(newData);
+            dispatch(setData([postedData, ...(data || [])]));
             setProfileImg(''); // 등록 후 프로필 url 초기화
+            setContents(''); // 등록 후 내용 초기화
         } else {
-            alert("닉네임과 내용은 필수 입력값입니다.");
+            alert("내용은 필수 입력값입니다.");
         }
     }
-
-    // 로컬 스토리지 데이터 저장
-    useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(data)); // 객체 모양 그대로 유지
-    }, [data]);
     
     return <StyledMain>
-                <InputData
-                    title={"닉네임"}
-                    placeholder={"최대 20글자까지 작성할 수 있습니다"}
-                    value={nickName}
-                    onChange={(e) => {
-                        setNickName(e.target.value);
-                        setInputCount(e.target.value.length);
-                    }}
-                    maxLength={20}
-                />
-                <StyledCount>
-                    <span>{inputCount}</span>
-                    <span>/20 자</span>
-                </StyledCount>
                 <InputData
                     title={"프로필 사진"}
                     placeholder={"프로필 이미지 url 작성"}

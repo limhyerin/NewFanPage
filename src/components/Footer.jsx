@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { setData } from "../redux/modules/data";
 
 const StyledFooter = styled.footer`
     width: 50%;
@@ -52,12 +54,32 @@ const StyledEmptyBox = styled.p`
 
 const Footer = () => {
     const navigate = useNavigate();
-    // 데이터 가져옴
-    const { data, selectBtn } = useSelector((state) => ({
-        data: state.data.data,
-        selectBtn: state.selectBtn,
-    }));
+    const dispatch = useDispatch();
 
+    // const nickName = localStorage.getItem('nickName');
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(
+                    `${process.env.REACT_APP_SERVER_URL}/posts`
+                );
+                dispatch(setData(response.data.posts));
+                localStorage.setItem('data', JSON.stringify(response.data.posts));
+            } catch (err) {
+                console.error("Failed to fetch data: ", err);
+            }
+        };
+        fetchData();
+    }, [dispatch]);
+
+    // 데이터 가져옴
+    const { data, selectBtn, nickName } = useSelector((state) => ({
+        data: state.data.data,
+        selectBtn: state.data.selectBtn,
+        nickName: state.data.nickName
+    }));
+    
     const filteredData = data ? data.filter((item) => item.iswho === selectBtn) : [];
 
     return <StyledFooter>
@@ -72,7 +94,7 @@ const Footer = () => {
                                     <StyledProfileIMG alt="profileImg" src={item.profileImg}/>  
                                 </StyledProfileZone>
                                 <StyledContentZone>
-                                    <h3>{item.nickName}</h3>
+                                    <h3>{nickName}</h3>
                                     <p>{item.time}</p>
                                     <p>{item.contents}</p>
                                 </StyledContentZone>

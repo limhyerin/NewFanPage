@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { setData } from '../redux/modules/data';
+import axios from 'axios';
 
 // 팬페이지 수정박스 틀
 const StyledLetter = styled.div`
@@ -99,8 +100,7 @@ const StyledDelButton = styled.button`
 function Detail() {
   // url에서 id 값 받아오기
   const { id } = useParams();
-  const storedData = JSON.parse(localStorage.getItem('data'));
-  const item = storedData.find((item) => item.id === id);
+  const [item, setItem] = useState(null);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -108,8 +108,22 @@ function Detail() {
   let [inputCount, setInputCount] = useState(0); 
 
   // 수정 기능
+  const [editData, setEditData] = useState('');
   const [isEditing, setIsEditing] = useState(false);
-  const [editData, setEditData] = useState(item.contents);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`);
+        setItem(response.data);
+        setEditData(response.data.contents);
+      } catch (error) {
+        console.error('Error fetching item details:', error);
+      }
+    };
+
+    fetchData();
+  }, [id]);
 
   const editHandler = () => {
     setIsEditing(true);
@@ -120,34 +134,38 @@ function Detail() {
     setEditData(item.contents);
   }
 
-  const saveHandler = () => {
+  const saveHandler = async () => {
     setIsEditing(false);
-    // 수정한 내용 저장
-    const updateData = storedData.map((data) => {
-      if(data.id === id) {
-        return {...data, contents: editData};
-      }
-      return data;
-    });
-    // 수정된 데이터 로컬 스토리지에 저장
-    localStorage.setItem('data', JSON.stringify(updateData));
-    // Redux store 업데이트
-    dispatch(setData(updateData));
-  }
-
-  const deleteHandler = () => {
-    const confirmDelete = window.confirm('정말로 삭제하시겠습니까?');
-    if(confirmDelete) {
-      // 삭제된 데이터 제외하고 저장
-      const updateData = storedData.filter((data) => data.id !== id);
-      localStorage.setItem('data', JSON.stringify(updateData));
-      // Redux store 업데이트
-      dispatch(setData(updateData));
-
-      // 삭제 후 홈 페이지로 이동
-      navigate(`/`);
+    try {
+      const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`, {
+        contents: editData,
+      });
+      setItem(response.data);
+      // Optionally, update Redux store with updated data
+      dispatch(setData(response.data));
+    } catch (error) {
+      console.error('Error updating item:', error);
     }
+  };
+
+  const deleteHandler = async () => {
+    const confirmDelete = window.confirm('Are you sure you want to delete?');
+    if (confirmDelete) {
+      try {
+        await axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`);
+        // Optionally, update Redux store after deletion
+        dispatch(setData([])); // Assuming you clear the entire data after deletion, adjust as per your requirement
+        navigate('/');
+      } catch (error) {
+        console.error('Error deleting item:', error);
+      }
+    }
+  };
+
+  if (!item) {
+    return <div>Loading...</div>;
   }
+
   return (
     <div>
       <StyledLetter>
