@@ -1,18 +1,16 @@
 # 💫Project : Aespa FanPage💫
 
-![](https://velog.velcdn.com/images/hrnn00/post/27369841-9c76-4363-81ef-b08e92083471/image.png)
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/70e1c2e1-4162-4c39-94bd-79857e1808cf)
+
 <br/>
 
 ## 프로젝트 설명
-
-React를 사용하여 useState만을 이용해 상태를 관리해보고 contextAPI와 Redux를 적용하여 다시 바꾸어 적용해보았으며 팬페이지(Fan Page)로 각 멤버를 지정해서 닉네임, 응원의 팬레터 글, 원하는 프로필 사진의 url을 작성한 후 등록하기 버튼을 클릭하면 최근순으로 팬레터가 추가되고 수정 및 삭제가 가능한 페이지
+React를 사용하여 구현한 팬페이지(Fan Page)로 회원가입을 통해 본인의 계정을 만들고 각 멤버를 지정해서 닉네임, 응원의 팬레터 글, 원하는 프로필 사진의 url을 작성한 후 등록하기 버튼을 클릭하면 최근순으로 팬레터가 추가되고 수정 및 삭제가 가능한 페이지이다.
 <br/>
 
 ## 브랜치(branch)
 
-- **propsDrilling** : context, redux 없이 useState만으로 상태관리해서 코드 작성
-- **context** : react context API 사용하여 전역상태를 이용한 코드로 리팩터링
-- **redux** : redux 라이브러리를 이용한 코드로 리팩터링
+- **redux-thunk** : 회원가입, 로그인 페이지 구현 및 redux를 redux-toolkit을 사용하여 구현하고 기존에 로컬스토리지에 데이터를 저장해서 가져오고 수정, 삭제했던 기능을 db.json을 통해 관리하고 사용할 수 있도록 변경 
   <br/>
 
 ## 구현사항
@@ -27,6 +25,15 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - 로고 클릭시, 새로고침
   : window.location.reload()
   ![](https://velog.velcdn.com/images/hrnn00/post/4e985003-feef-4877-abb2-372ad4d97569/image.png)
++ signin 버튼 : 클릭 시, 로그인 페이지로 이동 <br/>
++ signup 버튼 : 클릭 시, 회원가입 페이지로 이동<br/>
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/7190d5b9-4a4b-467c-a5a2-5b71984c5a5e)
+
+<br/>
+
++ 로그인, 회원가입페이지에서 로그인 성공시, 현재 로그인한 계정의 nickName과 Logout 기능 구현<br/>
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/35ea4632-10ab-4728-b862-43da2b9caa4d)
+
   <br/>
 
 #### 2. Member
@@ -35,17 +42,21 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - 멤버 이미지에 마우스 올리면 hover 효과 적용
 - 해당 그룹 멤버들 사진 적용
 - 각 멤버 사진 클릭시, 해당 멤버의 팬레터만 보여지도록 설정
-  ![](https://velog.velcdn.com/images/hrnn00/post/ac77add0-a4e3-4e82-bbaf-4010348b432b/image.png)
++ 각 멤버 이미지 클릭 시 클릭되었음을 보여주는 효과 적용<br/>
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/3afb0cfe-8e66-4257-8618-a76c73d31c2e)
+
   <br/>
 
 #### 3. Main
-
-- 닉네임, 프로필사진 url, 팬레터 보낼 멤버 클릭, 내용 구현
+- 닉네임값은 현재 로그인한 계정의 nickName 값 가져오기
+- 프로필사진 url, 팬레터 보낼 멤버 클릭, 내용 구현
 - select-box 구현 : 윈터, 카리나, 닝닝, 지젤 중에 선택
 - 글자수 카운트 구현 : 닉네임과 내용 따로 state를 만들어서 관리
-- 등록시에 로컬스토리지에 객체형태로 값 저장<br/>
-  ![](https://velog.velcdn.com/images/hrnn00/post/56c18aaf-6924-4ec7-80a3-749c853d2aba/image.png)
-  <br/>
+- 등록시에 로컬스토리지에 객체형태로 값 저장했던 부분 db.json으로 저장하고 관리 <br/>
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/ba71bc18-6789-4c90-881d-69a03c91774f)
+
+
+<br/>
 
 #### 4. Footer
 
@@ -62,9 +73,23 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - Main 컴포넌트에서 반복되는 입력을 재사용하기 위한 컴포넌트
 
 > ### page
+#### 6. SignIn.jsx
+- 이메일, 비밀번호를 입력하는 input 구현
+- 로그인 버튼 구현
+  : 클릭시 db.json안에 users에 일치하는 계정이면 App컴포넌트로 이동 <br/>
+  : 일치하지 않는 계정이면 "이메일 또는 비밀번호가 일치하지 않습니다" 문구 띄우기 <br/>
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/57d88927-6fbf-4783-8dd3-24a8c2628c1f)
 
-#### 6. detail.jsx
+  <br/>
+  
+#### 7. SignUp.jsx
+- 닉네임, 이메일, 비밀번호를 입력하는 input 구현
+- 회원가입 버튼 클릭시 db.json안에 중복되는 계정이 아니면 회원가입 성공을 시키고 App 컴포넌트로 이동
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/e82a5960-04cb-4616-8b36-e44aab7aaf85)
 
+  <br/>
+  
+#### 8. detail.jsx
 ![](https://velog.velcdn.com/images/hrnn00/post/4d3adc7e-a0fb-455e-ae2d-4cfd4d994bca/image.png)
 
 - 홈버튼 : 메인 페이지로 돌아가는 버튼
@@ -84,20 +109,25 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 
 ```jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "./App";
 import Detail from "./pages/detail";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const RouterConfig = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 };
 
 export default RouterConfig;
+
 ```
