@@ -41,7 +41,6 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - 멤버 이미지에 마우스 올리면 hover 효과 적용
 - 해당 그룹 멤버들 사진 적용
 - 각 멤버 사진 클릭시, 해당 멤버의 팬레터만 보여지도록 설정
-  ![](https://velog.velcdn.com/images/hrnn00/post/ac77add0-a4e3-4e82-bbaf-4010348b432b/image.png)
 + 각 멤버 이미지 클릭 시 클릭되었음을 보여주는 효과 적용
 ![image](https://github.com/limhyerin/NewFanPage/assets/70150896/3afb0cfe-8e66-4257-8618-a76c73d31c2e)
 
@@ -73,9 +72,23 @@ React를 사용하여 useState만을 이용해 상태를 관리해보고 context
 - Main 컴포넌트에서 반복되는 입력을 재사용하기 위한 컴포넌트
 
 > ### page
+#### 6. SignIn.jsx
+- 이메일, 비밀번호를 입력하는 input 구현
+- 로그인 버튼 구현
+  : 클릭시 db.json안에 users에 일치하는 계정이면 App컴포넌트로 이동 <br/>
+  : 일치하지 않는 계정이면 "이메일 또는 비밀번호가 일치하지 않습니다" 문구 띄우기 <br/>
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/57d88927-6fbf-4783-8dd3-24a8c2628c1f)
 
-#### 6. detail.jsx
+  <br/>
+  
+#### 7. SignUp.jsx
+- 닉네임, 이메일, 비밀번호를 입력하는 input 구현
+- 회원가입 버튼 클릭시 db.json안에 중복되는 계정이 아니면 회원가입 성공을 시키고 App 컴포넌트로 이동
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/e82a5960-04cb-4616-8b36-e44aab7aaf85)
 
+  <br/>
+  
+#### 8. detail.jsx
 ![](https://velog.velcdn.com/images/hrnn00/post/4d3adc7e-a0fb-455e-ae2d-4cfd4d994bca/image.png)
 
 - 홈버튼 : 메인 페이지로 돌아가는 버튼
