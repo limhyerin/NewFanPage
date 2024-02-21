@@ -45,23 +45,18 @@ const SignUp = () => {
       password,
     };
 
-    try {
-      // 서버로 중복 확인 요청
-      const response = await axios.get(`http://localhost:4000/users?nickName=${nickName}&email=${email}`);
-      if (response.data.length === 0) {
-        // 중복된 값이 없는 경우 회원가입 요청
-        const signUpResponse = await axios.post("http://localhost:4000/users", inputValue);
-        if (signUpResponse.status === 201) {
-          // 회원가입 성공
-          navigate('/');
-        }
-      } else {
-        // 중복된 값이 있는 경우
-        setErrorMessage('이미 있는 데이터입니다. 다시 입력해주세요.');
+    // 서버로 중복 확인 요청
+    const response = await axios.get(`http://localhost:4000/users?nickName=${nickName}&email=${email}`);
+    if (response.data.length === 0) {
+      // 중복된 값이 없는 경우 회원가입 요청
+      const signUpResponse = await axios.post("http://localhost:4000/users", inputValue);
+      if (signUpResponse.status === 201) {
+        // 회원가입 성공
+        navigate('/');
       }
-    } catch (error) {
-      // 회원가입 실패
-      setErrorMessage('회원가입 실패');
+    } else {
+      // db.json에 중복된 값이 있는 경우
+      setErrorMessage('이미 있는 데이터입니다. 다시 입력해주세요.');
     }
   };
 

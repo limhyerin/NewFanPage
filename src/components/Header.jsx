@@ -79,7 +79,6 @@ const Header = () => {
     const { nickName } = useSelector((state) => state.data);
 
     const handleLogout = () => {
-        // Clear authentication status and remove nickname from local storage
         localStorage.removeItem('nickName');
         navigate('/signin');
     };
@@ -98,7 +97,6 @@ const Header = () => {
                     )}
                 </StyledBtnBox>
                 <StyledLogo>
-                    {/* 로고 클릭 시, 새로고침 */}
                     <StyledLogoImage alt="logo" src={`${process.env.PUBLIC_URL}/public_assets/logo.png`} onClick={() => window.location.reload()}/>                    
                 </StyledLogo>
             </StyledHeader>

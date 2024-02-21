@@ -41,30 +41,22 @@ const SignIn = () => {
     const email = e.target[0].value;
     const password = e.target[1].value;
 
-    try {
-      // 서버로 사용자 정보 요청
-      const response = await axios.get(`http://localhost:4000/users?email=${email}`);
-      const users = response.data;
+    // 서버로 사용자 정보 요청
+    const response = await axios.get(`http://localhost:4000/users?email=${email}`);
+    const users = response.data;
 
-      // 입력한 이메일과 비밀번호로 사용자 인증
-      const user = users.find((user) => user.email === email && user.password === password);
+    // 입력한 이메일과 비밀번호로 사용자 인증
+    const user = users.find((user) => user.email === email && user.password === password);
 
-      if (user) {
-        // 로그인 성공
-        const { nickName } = user; // nickName 값 가져오기
-        dispatch(setNickName(nickName));
-
-        // Save nickName in local storage
-        localStorage.setItem('nickName', nickName);
-
-        navigate('/');
-      } else {
-        // 로그인 실패
-        setErrorMessage('이메일 또는 비밀번호가 일치하지 않습니다.');
-      }
-    } catch (error) {
-      // 로그인 실패
-      setErrorMessage('로그인 실패');
+    if (user) {
+      // 로그인 성공시
+      const { nickName } = user;
+      dispatch(setNickName(nickName));
+      localStorage.setItem('nickName', nickName);
+      navigate('/');
+    } else {
+      // 로그인 실패시
+      setErrorMessage('이메일 또는 비밀번호가 일치하지 않습니다.');
     }
   };
 

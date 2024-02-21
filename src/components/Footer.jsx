@@ -56,8 +56,6 @@ const Footer = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    // const nickName = localStorage.getItem('nickName');
-
     useEffect(() => {
         const fetchData = async () => {
             try {

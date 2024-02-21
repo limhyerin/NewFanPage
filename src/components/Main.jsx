@@ -53,7 +53,7 @@ const Main = () => {
     // 글자수 제한
     let [contentCount, setContentCount] = useState(0);
 
-    // 데이터에 접근
+    // 데이터에 가져오기
     const dispatch = useDispatch();
     const { data, selectWho, nickName } = useSelector((state) => ({
         data: state.data.data,
@@ -72,7 +72,7 @@ const Main = () => {
 
     // 로컬 스토리지 데이터 저장
     useEffect(() => {
-        localStorage.setItem('data', JSON.stringify(data)); // 객체 모양 그대로 유지
+        localStorage.setItem('data', JSON.stringify(data));
     }, [data]);
 
     useEffect(() => {

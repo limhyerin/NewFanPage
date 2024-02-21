@@ -121,7 +121,6 @@ function Detail() {
         console.error('Error fetching item details:', error);
       }
     };
-
     fetchData();
   }, [id]);
 
@@ -136,35 +135,21 @@ function Detail() {
 
   const saveHandler = async () => {
     setIsEditing(false);
-    try {
       const response = await axios.put(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`, {
         contents: editData,
       });
       setItem(response.data);
-      // Optionally, update Redux store with updated data
       dispatch(setData(response.data));
-    } catch (error) {
-      console.error('Error updating item:', error);
-    }
   };
 
   const deleteHandler = async () => {
     const confirmDelete = window.confirm('Are you sure you want to delete?');
     if (confirmDelete) {
-      try {
         await axios.delete(`${process.env.REACT_APP_SERVER_URL}/posts/${id}`);
-        // Optionally, update Redux store after deletion
-        dispatch(setData([])); // Assuming you clear the entire data after deletion, adjust as per your requirement
+        dispatch(setData([]));
         navigate('/');
-      } catch (error) {
-        console.error('Error deleting item:', error);
-      }
     }
   };
-
-  if (!item) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <div>
