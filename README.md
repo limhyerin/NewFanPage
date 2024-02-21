@@ -25,11 +25,13 @@ React를 사용하여 구현한 팬페이지(Fan Page)로 회원가입을 통해
 - 로고 클릭시, 새로고침
   : window.location.reload()
   ![](https://velog.velcdn.com/images/hrnn00/post/4e985003-feef-4877-abb2-372ad4d97569/image.png)
-+ signin 버튼 : 클릭 시, 로그인 페이지로 이동
-+ signup 버튼 : 클릭 시, 회원가입 페이지로 이동
++ signin 버튼 : 클릭 시, 로그인 페이지로 이동 <br/>
++ signup 버튼 : 클릭 시, 회원가입 페이지로 이동<br/>
 ![image](https://github.com/limhyerin/NewFanPage/assets/70150896/7190d5b9-4a4b-467c-a5a2-5b71984c5a5e)
 
-+ 로그인, 회원가입페이지에서 로그인 성공시, 현재 로그인한 계정의 nickName과 Logout 기능 구현
+<br/>
+
++ 로그인, 회원가입페이지에서 로그인 성공시, 현재 로그인한 계정의 nickName과 Logout 기능 구현<br/>
 ![image](https://github.com/limhyerin/NewFanPage/assets/70150896/35ea4632-10ab-4728-b862-43da2b9caa4d)
 
   <br/>
@@ -40,7 +42,7 @@ React를 사용하여 구현한 팬페이지(Fan Page)로 회원가입을 통해
 - 멤버 이미지에 마우스 올리면 hover 효과 적용
 - 해당 그룹 멤버들 사진 적용
 - 각 멤버 사진 클릭시, 해당 멤버의 팬레터만 보여지도록 설정
-+ 각 멤버 이미지 클릭 시 클릭되었음을 보여주는 효과 적용
++ 각 멤버 이미지 클릭 시 클릭되었음을 보여주는 효과 적용<br/>
 ![image](https://github.com/limhyerin/NewFanPage/assets/70150896/3afb0cfe-8e66-4257-8618-a76c73d31c2e)
 
   <br/>
