@@ -1,6 +1,6 @@
 # 💫Project : Aespa FanPage💫
 
-![Uploading image.png…]()
+![image](https://github.com/limhyerin/NewFanPage/assets/70150896/70e1c2e1-4162-4c39-94bd-79857e1808cf)
 
 <br/>
 
