@@ -1,6 +1,7 @@
 # 💫Project : Aespa FanPage💫
 
-![](https://velog.velcdn.com/images/hrnn00/post/27369841-9c76-4363-81ef-b08e92083471/image.png)
+![Uploading image.png…]()
+
 <br/>
 
 ## 프로젝트 설명
